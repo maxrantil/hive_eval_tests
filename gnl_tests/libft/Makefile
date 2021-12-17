@@ -1,5 +1,5 @@
 NAME = libft.a
-FLAGS = -Wall -Wextra -Werror
+#FLAGS = -Wall -Wextra -Werror
 HEADER_PATH = libft.h
 C_FILES = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c \
 		  ft_itoa.c ft_memalloc.c ft_memccpy.c ft_memchr.c ft_memcmp.c ft_memcpy.c ft_memdel.c \
@@ -25,7 +25,7 @@ $(NAME):
 	@echo "███████╗██║██████╔╝██║        ██║"
 	@echo "╚══════╝╚═╝╚═════╝ ╚═╝        ╚═╝"   
 	@echo ""
-	@gcc $(FLAGS) -c $(C_FILES) -I $(HEADER_PATH)
+	@gcc -c $(C_FILES) -I $(HEADER_PATH)
 	@ar rc $(NAME) $(O_FILES) 
 	@echo "$(NAME) created"
 	@ranlib $(NAME)

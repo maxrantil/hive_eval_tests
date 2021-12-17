@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_stout2lines.c                                 :+:      :+:    :+:   */
+/*   main_stout.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrantil <mrantil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:00:51 by mrantil           #+#    #+#             */
-/*   Updated: 2021/12/17 12:46:04 by mrantil          ###   ########.fr       */
+/*   Updated: 2021/12/16 14:25:14 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,13 @@ int	main()//int argc, char **argv)
 	int		i;
 
 	i = get_next_line(fd, &line);
-	printf("ret:%d	fd:%d		%s\n", i, fd, line);
+	printf("%s	fd: %d	ret: %d\n", line, fd, i);
 	i = get_next_line(fd, &line);
-	printf("ret:%d	fd:%d		%s\n", i, fd, line);
+	printf("%s	fd: %d	ret: %d\n", line, fd, i);
+	i = get_next_line(fd, &line);
+	printf("%s	fd: %d	ret: %d\n", line, fd, i);
+	i = get_next_line(fd, &line);
+	printf("%s	fd: %d	ret: %d\n", line, fd, i);
 //	ft_strdel(&line);
 //	system("leaks test_gnl");
 	return (0);

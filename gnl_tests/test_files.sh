@@ -1,3 +1,6 @@
+#!/bin/bash
+
+time ./test_gnl plato
 ./test_gnl test1
 ./test_gnl test1non
 ./test_gnl test2
@@ -17,4 +20,5 @@
 ./test_gnl test9
 ./test_gnl test9non
 ./test_gnl empty
-./test_gnl plato
+replace "main_argv" "main_stdout1lines" -- Makefile
+echo "stdout 1 line test begin after 'make re"

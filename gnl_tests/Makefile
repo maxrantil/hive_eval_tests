@@ -23,7 +23,7 @@ $(NAME):
 	@echo "$(NAME) created"
 
 clean:
-	@rm -rf $(O_FILES)
+	@rm -rf *.o
 	@echo ".o files deleted"
 
 fclean: clean

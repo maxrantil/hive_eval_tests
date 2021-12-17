@@ -1,2 +1,2 @@
-testfd1
-YES
+this text is from testfd1
+YES ALL GOOD IN THE NEIGHBOURHOODS! (from testfd1 file)
