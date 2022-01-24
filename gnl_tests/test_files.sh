@@ -1,6 +1,8 @@
 #!/bin/bash
 
 time ./test_gnl plato
+echo "under 1s is very good"
+
 ./test_gnl test1
 ./test_gnl test1non
 ./test_gnl test2
@@ -20,5 +22,7 @@ time ./test_gnl plato
 ./test_gnl test9
 ./test_gnl test9non
 ./test_gnl empty
-replace "main_argv" "main_stdout1lines" -- Makefile
+# sed -i 's/main_argv/main_stdout1lines/g' Makefile
+# awk '{gsub("main_argv", "main_stdout1lines", $0); print}' Makefile
+# replace "main_argv" "main_stdout1lines" -- Makefile
 echo "stdout 1 line test begin after 'make re"

@@ -6,12 +6,12 @@
 /*   By: mrantil <mrantil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:00:51 by mrantil           #+#    #+#             */
-/*   Updated: 2021/12/17 13:38:34 by mrantil          ###   ########.fr       */
+/*   Updated: 2021/12/21 14:25:48 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft/libft.h"
+#include "libft/includes/libft.h"
 #include <fcntl.h>
 #include <stdio.h>
 
@@ -21,43 +21,59 @@ int	main(int argc, char **argv)
 	char	*line = NULL;
 	int		i;
 
-	(void)argc;
-	fd = open(argv[1], O_RDONLY);
-	if (strcmp(argv[1], "test1") == 0)
+	if (argc == 1)
 	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234") == 0)
+		fd = 0;
+		while (get_next_line(fd, &line))
 		{
-			printf("\nTEST1		OK");
-			return (0);
+			printf("%s\n", line);
+			free(line);
 		}
-		else
-			printf("\n\ntest1 fail :*(\n\n");
 	}
-	else if (strcmp(argv[1], "test1non") == 0)
+	else
 	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234") == 0)
-		{
-			printf("\nTEST1NON	OK");
-			return (0);
-		}
-		else
-		{
-			printf("\n\ntest1non fail :*(\n\n");
-			return (0);
-		}	
-	}
-	else if (strcmp(argv[1], "test2") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234") == 0)
+		fd = open(argv[1], O_RDONLY);	
+		if (strcmp(argv[1], "test1") == 0)
 		{
 			i = get_next_line(fd, &line);
-			if (strcmp(line, "4321") == 0)
+			if (strcmp(line, "1234") == 0)
 			{
-				printf("\nTEST2		OK");
+				printf("\nTEST1		OK");
 				return (0);
+			}
+			else
+				printf("\n\ntest1 fail :*(\n\n");
+		}
+		else if (strcmp(argv[1], "test1non") == 0)
+		{
+			i = get_next_line(fd, &line);
+			if (strcmp(line, "1234") == 0)
+			{
+				printf("\nTEST1NON	OK");
+				return (0);
+			}
+			else
+			{
+				printf("\n\ntest1non fail :*(\n\n");
+				return (0);
+			}	
+		}
+		else if (strcmp(argv[1], "test2") == 0)
+		{
+			i = get_next_line(fd, &line);
+			if (strcmp(line, "1234") == 0)
+			{
+				i = get_next_line(fd, &line);
+				if (strcmp(line, "4321") == 0)
+				{
+					printf("\nTEST2		OK");
+					return (0);
+				}
+				else
+				{
+					printf("\n\ntest2 fail :*(\n\n");
+					return (0);
+				}
 			}
 			else
 			{
@@ -65,22 +81,22 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest2 fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test2non") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234") == 0)
+		else if (strcmp(argv[1], "test2non") == 0)
 		{
 			i = get_next_line(fd, &line);
-			if (strcmp(line, "4321") == 0)
+			if (strcmp(line, "1234") == 0)
 			{
-				printf("\nTEST2NON	OK");
-				return (0);
+				i = get_next_line(fd, &line);
+				if (strcmp(line, "4321") == 0)
+				{
+					printf("\nTEST2NON	OK");
+					return (0);
+				}
+				else
+				{
+					printf("\n\ntest2non fail :*(\n\n");
+					return (0);
+				}
 			}
 			else
 			{
@@ -88,19 +104,10 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest2non fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test3") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234") == 0)
+		else if (strcmp(argv[1], "test3") == 0)
 		{
 			i = get_next_line(fd, &line);
-			if (strcmp(line, "4321") == 0)
+			if (strcmp(line, "1234") == 0)
 			{
 				i = get_next_line(fd, &line);
 				if (strcmp(line, "4321") == 0)
@@ -109,10 +116,19 @@ int	main(int argc, char **argv)
 					if (strcmp(line, "4321") == 0)
 					{
 						i = get_next_line(fd, &line);
-						if (!i)
+						if (strcmp(line, "4321") == 0)
 						{
-							printf("\nTEST3		OK");
-							return (0);
+							i = get_next_line(fd, &line);
+							if (!i)
+							{
+								printf("\nTEST3		OK");
+								return (0);
+							}
+							else
+							{
+								printf("\n\ntest3 fail :*(\n\n");
+								return (0);
+							}
 						}
 						else
 						{
@@ -138,19 +154,10 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest3 fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test3non") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234") == 0)
+		else if (strcmp(argv[1], "test3non") == 0)
 		{
 			i = get_next_line(fd, &line);
-			if (strcmp(line, "4321") == 0)
+			if (strcmp(line, "1234") == 0)
 			{
 				i = get_next_line(fd, &line);
 				if (strcmp(line, "4321") == 0)
@@ -159,9 +166,18 @@ int	main(int argc, char **argv)
 					if (strcmp(line, "4321") == 0)
 					{
 						i = get_next_line(fd, &line);
-						if (!i)
+						if (strcmp(line, "4321") == 0)
 						{
-							printf("\nTEST3NON	OK");
+							i = get_next_line(fd, &line);
+							if (!i)
+							{
+								printf("\nTEST3NON	OK");
+								return (0);
+							}
+						}
+						else
+						{
+							printf("\n\ntest3non fail :*(\n\n");
 							return (0);
 						}
 					}
@@ -183,47 +199,47 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest3non fail :*(\n\n");
-			return (0);
-		}
-	}
-	if (strcmp(argv[1], "test4") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "12344321") == 0)
-		{
-			printf("\nTEST4		OK");
-			return (0);
-		}
-		else
-			printf("\n\ntest4 fail :*(\n\n");
-	}
-	else if (strcmp(argv[1], "test4non") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "12344321") == 0)
-		{
-			printf("\nTEST4NON	OK");
-			return (0);
-		}
-		else
-		{
-			printf("\n\ntest4non fail :*(\n\n");
-			return (0);
-		}	
-	}
-	else if (strcmp(argv[1], "test5") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "12344321") == 0)
+		if (strcmp(argv[1], "test4") == 0)
 		{
 			i = get_next_line(fd, &line);
 			if (strcmp(line, "12344321") == 0)
 			{
-				printf("\nTEST5		OK");
+				printf("\nTEST4		OK");
 				return (0);
+			}
+			else
+				printf("\n\ntest4 fail :*(\n\n");
+		}
+		else if (strcmp(argv[1], "test4non") == 0)
+		{
+			i = get_next_line(fd, &line);
+			if (strcmp(line, "12344321") == 0)
+			{
+				printf("\nTEST4NON	OK");
+				return (0);
+			}
+			else
+			{
+				printf("\n\ntest4non fail :*(\n\n");
+				return (0);
+			}	
+		}
+		else if (strcmp(argv[1], "test5") == 0)
+		{
+			i = get_next_line(fd, &line);
+			if (strcmp(line, "12344321") == 0)
+			{
+				i = get_next_line(fd, &line);
+				if (strcmp(line, "12344321") == 0)
+				{
+					printf("\nTEST5		OK");
+					return (0);
+				}
+				else
+				{
+					printf("\n\ntest5 fail :*(\n\n");
+					return (0);
+				}
 			}
 			else
 			{
@@ -231,22 +247,22 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest5 fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test5non") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "12344321") == 0)
+		else if (strcmp(argv[1], "test5non") == 0)
 		{
 			i = get_next_line(fd, &line);
 			if (strcmp(line, "12344321") == 0)
 			{
-				printf("\nTEST5NON	OK");
-				return (0);
+				i = get_next_line(fd, &line);
+				if (strcmp(line, "12344321") == 0)
+				{
+					printf("\nTEST5NON	OK");
+					return (0);
+				}
+				else
+				{
+					printf("\n\ntest5non fail :*(\n\n");
+					return (0);
+				}
 			}
 			else
 			{
@@ -254,16 +270,7 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest5non fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test6") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "12344321") == 0)
+		else if (strcmp(argv[1], "test6") == 0)
 		{
 			i = get_next_line(fd, &line);
 			if (strcmp(line, "12344321") == 0)
@@ -275,10 +282,19 @@ int	main(int argc, char **argv)
 					if (strcmp(line, "12344321") == 0)
 					{
 						i = get_next_line(fd, &line);
-						if (!i)
+						if (strcmp(line, "12344321") == 0)
 						{
-							printf("\nTEST6		OK");
-							return (0);
+							i = get_next_line(fd, &line);
+							if (!i)
+							{
+								printf("\nTEST6		OK");
+								return (0);
+							}
+							else
+							{
+								printf("\n\ntest6 fail :*(\n\n");
+								return (0);
+							}
 						}
 						else
 						{
@@ -304,16 +320,7 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest6 fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test6non") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "12344321") == 0)
+		else if (strcmp(argv[1], "test6non") == 0)
 		{
 			i = get_next_line(fd, &line);
 			if (strcmp(line, "12344321") == 0)
@@ -325,9 +332,18 @@ int	main(int argc, char **argv)
 					if (strcmp(line, "12344321") == 0)
 					{
 						i = get_next_line(fd, &line);
-						if (!i)
+						if (strcmp(line, "12344321") == 0)
 						{
-							printf("\nTEST6NON	OK");
+							i = get_next_line(fd, &line);
+							if (!i)
+							{
+								printf("\nTEST6NON	OK");
+								return (0);
+							}
+						}
+						else
+						{
+							printf("\n\ntest6non fail :*(\n\n");
 							return (0);
 						}
 					}
@@ -349,47 +365,47 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest6non fail :*(\n\n");
-			return (0);
-		}
-	}
-	if (strcmp(argv[1], "test7") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234432112344321") == 0)
-		{
-			printf("\nTEST7		OK");
-			return (0);
-		}
-		else
-			printf("\n\ntest7 fail :*(\n\n");
-	}
-	else if (strcmp(argv[1], "test7non") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234432112344321") == 0)
-		{
-			printf("\nTEST7NON	OK");
-			return (0);
-		}
-		else
-		{
-			printf("\n\ntest7non fail :*(\n\n");
-			return (0);
-		}	
-	}
-	else if (strcmp(argv[1], "test8") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234432112344321") == 0)
+		if (strcmp(argv[1], "test7") == 0)
 		{
 			i = get_next_line(fd, &line);
 			if (strcmp(line, "1234432112344321") == 0)
 			{
-				printf("\nTEST8		OK");
+				printf("\nTEST7		OK");
 				return (0);
+			}
+			else
+				printf("\n\ntest7 fail :*(\n\n");
+		}
+		else if (strcmp(argv[1], "test7non") == 0)
+		{
+			i = get_next_line(fd, &line);
+			if (strcmp(line, "1234432112344321") == 0)
+			{
+				printf("\nTEST7NON	OK");
+				return (0);
+			}
+			else
+			{
+				printf("\n\ntest7non fail :*(\n\n");
+				return (0);
+			}	
+		}
+		else if (strcmp(argv[1], "test8") == 0)
+		{
+			i = get_next_line(fd, &line);
+			if (strcmp(line, "1234432112344321") == 0)
+			{
+				i = get_next_line(fd, &line);
+				if (strcmp(line, "1234432112344321") == 0)
+				{
+					printf("\nTEST8		OK");
+					return (0);
+				}
+				else
+				{
+					printf("\n\ntest8 fail :*(\n\n");
+					return (0);
+				}
 			}
 			else
 			{
@@ -397,22 +413,22 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest8 fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test8non") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234432112344321") == 0)
+		else if (strcmp(argv[1], "test8non") == 0)
 		{
 			i = get_next_line(fd, &line);
 			if (strcmp(line, "1234432112344321") == 0)
 			{
-				printf("\nTEST8NON	OK");
-				return (0);
+				i = get_next_line(fd, &line);
+				if (strcmp(line, "1234432112344321") == 0)
+				{
+					printf("\nTEST8NON	OK");
+					return (0);
+				}
+				else
+				{
+					printf("\n\ntest8non fail :*(\n\n");
+					return (0);
+				}
 			}
 			else
 			{
@@ -420,16 +436,7 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest8non fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test9") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234432112344321") == 0)
+		else if (strcmp(argv[1], "test9") == 0)
 		{
 			i = get_next_line(fd, &line);
 			if (strcmp(line, "1234432112344321") == 0)
@@ -441,10 +448,19 @@ int	main(int argc, char **argv)
 					if (strcmp(line, "1234432112344321") == 0)
 					{
 						i = get_next_line(fd, &line);
-						if (!i)
+						if (strcmp(line, "1234432112344321") == 0)
 						{
-							printf("\nTEST9		OK");
-							return (0);
+							i = get_next_line(fd, &line);
+							if (!i)
+							{
+								printf("\nTEST9		OK");
+								return (0);
+							}
+							else
+							{
+								printf("\n\ntest9 fail :*(\n\n");
+								return (0);
+							}
 						}
 						else
 						{
@@ -470,30 +486,35 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
-		{
-			printf("\n\ntest9 fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "test9non") == 0)
-	{
-		i = get_next_line(fd, &line);
-		if (strcmp(line, "1234432112344321") == 0)
+		else if (strcmp(argv[1], "test9non") == 0)
 		{
 			i = get_next_line(fd, &line);
 			if (strcmp(line, "1234432112344321") == 0)
 			{
+				free(line);
 				i = get_next_line(fd, &line);
 				if (strcmp(line, "1234432112344321") == 0)
 				{
+					free(line);
 					i = get_next_line(fd, &line);
 					if (strcmp(line, "1234432112344321") == 0)
 					{
+						free(line);
 						i = get_next_line(fd, &line);
-						if (!i)
+						if (strcmp(line, "1234432112344321") == 0)
 						{
-							printf("\nTEST9NON	OK");
+							free(line);
+							i = get_next_line(fd, &line);
+							if (!i)
+							{
+								printf("\nTEST9NON	OK");
+								//system("leaks test_gnl");
+								return (0);
+							}
+						}
+						else
+						{
+							printf("\n\ntest9non fail :*(\n\n");
 							return (0);
 						}
 					}
@@ -515,40 +536,38 @@ int	main(int argc, char **argv)
 				return (0);
 			}
 		}
-		else
+		else if (strcmp(argv[1], "empty") == 0)
 		{
-			printf("\n\ntest9non fail :*(\n\n");
-			return (0);
-		}
-	}
-	else if (strcmp(argv[1], "empty") == 0)
-	{
-		if (get_next_line(fd, &line) == 0)
-		{
-			printf("\nEMPTY FILE:	OK\n");
-			return (0);
-		}
-		else
-		{
-			printf("\nempty file fail :*(\n");
-			return (0);
-		}
-	}
-	else if ((fd = open("plato.txt", O_RDONLY)) && fd > 0)
-	{
-		while (1)
-		{
-			i = get_next_line(fd, &line);
-			printf("%s\n", line);
-			if (!i)
+			if (get_next_line(fd, &line) == 0)
+			{
+				printf("\nEMPTY FILE:	OK\n");
 				return (0);
+			}
+			else
+			{
+				printf("\nempty file fail :*(\n");
+				return (0);
+			}
 		}
+		else if ((fd = open("plato.txt", O_RDONLY)) && fd > 0)
+		{
+			while (1)
+			{
+				i = get_next_line(fd, &line);
+				printf("%s\n", line);
+				if (!i)
+				{
+					//system("leaks test_gnl");
+					return (0);
+				}
+			}
+		}
+		else
+			printf("error :'(");
+		//i = get_next_line(fd, &line);
 	}
-	else
-		printf("error :'(");
-	//i = get_next_line(fd, &line);
-	
  
+//free(&line);
 //	ft_strdel(&line);
 //	system("leaks test_gnl");
 	return (0);
