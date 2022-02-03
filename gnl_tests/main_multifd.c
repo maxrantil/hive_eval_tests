@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:00:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/01/24 15:00:29 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/02/02 11:48:52 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,14 @@ int	main(int argc, char **argv)
 {
 	char	*line = NULL;
 	int		i;
+	int		fd1;
+	int		fd2;
+	int		fd3;
 
 	(void)argc;
-	int	fd1 = open(argv[1], O_RDONLY);
-	int	fd2 = open(argv[2], O_RDONLY);
-	int	fd3 = open(argv[3], O_RDONLY);
+	fd1 = open(argv[1], O_RDONLY);
+	fd2 = open(argv[2], O_RDONLY);
+	fd3 = open(argv[3], O_RDONLY);
 	i = get_next_line(fd1, &line);
 	if (i)
 		printf("%s\n", line);

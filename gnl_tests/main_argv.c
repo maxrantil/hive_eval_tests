@@ -6,14 +6,15 @@
 /*   By: mrantil <mrantil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:00:51 by mrantil           #+#    #+#             */
-/*   Updated: 2021/12/21 14:25:48 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/02/03 14:49:35 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft/includes/libft.h"
+#include "libft/libft.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int	main(int argc, char **argv)
 {
@@ -23,11 +24,13 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 	{
-		fd = 0;
+		fd = 1;
 		while (get_next_line(fd, &line))
 		{
 			printf("%s\n", line);
 			free(line);
+			if (-1 == get_next_line(fd, &line))
+				break ;
 		}
 	}
 	else
@@ -555,9 +558,10 @@ int	main(int argc, char **argv)
 			{
 				i = get_next_line(fd, &line);
 				printf("%s\n", line);
+				free(line);
 				if (!i)
 				{
-					//system("leaks test_gnl");
+					system("leaks test_gnl");
 					return (0);
 				}
 			}
