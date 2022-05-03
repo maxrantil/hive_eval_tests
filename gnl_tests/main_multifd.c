@@ -6,7 +6,7 @@
 /*   By: mrantil <mrantil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:00:51 by mrantil           #+#    #+#             */
-/*   Updated: 2022/02/02 11:48:52 by mrantil          ###   ########.fr       */
+/*   Updated: 2022/04/21 18:37:24 by mrantil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	main(int argc, char **argv)
 		printf("error ;*(");
 //	ft_putchar('\n');
 //	ft_strdel(&line);
-//	system("leaks test_gnl");
+	system("leaks test_gnl");
 	return (0);
 }
